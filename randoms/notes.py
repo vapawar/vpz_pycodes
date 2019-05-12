@@ -1,7 +1,7 @@
-numpy notes
------------
+#numpy notes
+#-----------
 
-ch.4
+#ch.4
 a1 = np.array(rage(24))
 
 #flattens array to one dim
