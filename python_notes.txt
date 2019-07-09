@@ -1,0 +1,10 @@
+#to remove all local packages
+
+$ pip freeze > requirements.txt
+$ pip uninstall -r requirements.txt -y
+
+
+#to update all local packages
+
+$ pip install pip-review
+$ pip-review --local --interactive
