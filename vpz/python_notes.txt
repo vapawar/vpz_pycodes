@@ -1,0 +1,49 @@
+1 variable
+  a=117283
+  b="eufidkjf"
+
+2.input/output
+  a=input()
+  b=int(input("enter a number: "))
+  print(a)
+
+3 decision making
+  if(a>10):
+	print(a)
+  else
+    print(b)
+  switch(a):
+    case a:
+	  print()
+	  break
+	case b:
+	  print(c)
+	  break
+
+4 loop:
+  for(1 .. 10 ):
+    print()
+  for(a in data):
+	print(a)
+
+5 operator:
+a. math operator a=0, b=10, c=4
++: a=b+c a=10+5=14
+-: a=b-c a=b-c=6
+*: a=b*c a=b*c=140
+/: a=b/c a=10/5=2.5
+%: a=b%c a=b%c=2
+**:a=b**c=10000
+
+b. comparison a=10 b=8
+== a==b false
+!= a!=b true
+<= a<=b false
+>= a>=b true
+< a<b false
+> a>b true
+
+c. logical operator
+and if(a>10 and b>2)
+or  if(a>10 or b>2)
+not if(!(a>20))
