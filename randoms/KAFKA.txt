@@ -1,0 +1,25 @@
+//Start kafka server
+C:\kafka_2.12\bin\windows\kafka-server-start.bat C:\kafka_2.12\config\server.properties
+C:\kafka_2.12\bin\windows\kafka-server-start.bat C:\kafka_2.12\config\server2.properties
+
+//create topic
+kafka-topics.bat --create --zookeeper localhost:2181 --replication-factor 1 --partitions 1 --topic test
+kafka-topics.bat --create --zookeeper localhost:2181 --replication-factor 2 --partitions 1 --topic test2
+
+//create producer
+kafka-console-producer.bat --broker-list localhost:9092 --topic test
+
+//create consumer
+kafka-console-consumer.bat --bootstrap-server localhost:9092 --topic test
+
+//List Topics
+kafka-topics.bat --list --zookeeper localhost:2181
+
+//Describe Topic
+kafka-topics.bat --describe --zookeeper localhost:2181 --topic test
+
+//Read messages from the beginning
+kafka-console-consumer.bat --bootstrap-server localhost:9092 --topic test --from-beginning
+
+//Delete Topic
+kafka-topics.bat --zookeeper localhost:2181 --delete --topic test

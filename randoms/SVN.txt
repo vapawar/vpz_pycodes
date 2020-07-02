@@ -1,0 +1,207 @@
+$ pip freeze > abc.txt
+--upgrade all
+$ pip install --upgrade -r abc.txt
+--remove all
+$pip uninstall -y -r abc.txt
+
+netstat -ano | findstr 18140
+taskkill -f -pid 18140
+
+#DELETE LOCAL BRANCHES NOT ON REMOTE
+git fetch -p && git branch -vv | awk '/: gone]/{print $1}' | xargs git branch -D
+
+
+mvn clean install -DskipTests
+mvn test -Dtest=IncidentRestControllerTest
+mvn test -Dtest=AntiMalwareIncidentTest
+mvn dependency:tree
+
+#RENAME BRANCH ON GIT
+#1.Rename your local branch.
+#If you are on the branch you want to rename:
+git branch -m new-name
+#If you are on a different branch:
+git branch -m old-name new-name
+#2.Delete the old-name remote branch and push the new-name local branch.
+git push origin :old-name new-name
+#3.Reset the upstream branch for the new-name local branch.
+#Switch to the branch and then:
+git push origin -u new-name
+
+#RESET LOCAL MASTER TO REMOTE MASTER
+git fetch origin
+git reset --hard origin/master
+
+#BRANCH OPERATIONS
+#create branch
+git branch dev
+#Delete branch
+#local:
+git branch -d dev
+#remote:
+git branch -d -r origin/dev
+#create and checkout branch
+git checkout -b dev
+#View all Local git Branches
+git branch -v #LOCAL
+git branch -r -v #REMOTE
+#see merged/unmerged local branches
+git branch --merged
+git branch --no-merged
+# Rename a Git Branch
+git branch -m dev
+#create branch at given commit
+git branch dev_branch df27a49
+
+#STASH OPERATIONS
+git stash show stash@{0} --name-only
+git stash drop stash@{n}
+#STASH ONLY UNSTAGED CHANGES
+git stash -k
+
+git checkout stash@{1} -- <filename>
+git checkout master pom.xml
+
+git cherry-pick 423831b1acfadc6779df3881041d2758d3f55a05
+git cherry-pick --abort
+
+git diff master vpawar_tests pom.xml
+git diff master pom.xml
+git diff pom.xml
+git diff --name-only master | wc -l
+git diff --name-status
+git diff --name-only
+git diff --staged --name-only
+git diff --staged pom.xml
+
+#COMPARE LOCAL COMMITS WITH REMOTE COMMIT ON SAME BRANCH
+git diff origin/master master
+git diff origin/tag_precedence tag_precedence --name-only
+git diff origin/tag_precedence tag_precedence src/main/java/com/hp/mpi/icm/services/util/Constants.java
+
+#UNDO COMMIT:
+#delete the most recent commit, keeping the work
+git reset --soft HEAD~1
+#delete the most recent commit, destroying the work
+git reset --hard HEAD~1
+#remove last 2 commits from local and remote
+git reset --hard HEAD~2
+git push -f
+
+
+$ mvn spring-boot:run
+$ java -jar target/myapplication-0.0.1-SNAPSHOT.jar
+
+A Build Lifecycle is Made Up of Phases:
+validate - validate the project is correct and all necessary information is available
+compile - compile the source code of the project
+test - test the compiled source code using a suitable unit testing framework. These tests should not require the code be packaged or deployed
+package - take the compiled code and package it in its distributable format, such as a JAR.
+verify - run any checks on results of integration tests to ensure quality criteria are met
+install - install the package into the local repository, for use as a dependency in other projects locally
+deploy - done in the build environment, copies the final package to the remote repository for sharing with other developers and projects.
+
+
+<excludes>
+<exclude>com/hp/mpi/icm/runnable/*.class</exclude>
+<exclude>com/hp/mpi/icm/elasticsearch/dto/*.class</exclude>
+<exclude>com/hp/mpi/icm/consumers/*.class</exclude>
+<exclude>com/hp/mpi/icm/services/dto/*.class</exclude>
+<exclude>com/hp/mpi/icm/services/evanios/dto/*.class</exclude>
+<exclude>com/hp/mpi/icm/services/util/*.class</exclude>
+<exclude>com/hp/mpi/icm/util/*.class</exclude>
+<exclude>db/migration/*.class</exclude>
+</excludes>
+
+
+<plugin>
+<groupId>org.jacoco</groupId>
+<artifactId>jacoco-maven-plugin</artifactId>
+<version>0.8.3</version>
+<executions>
+<execution>
+<id>prepare-agent</id>
+<goals>
+<goal>prepare-agent</goal>
+</goals>
+</execution>
+<execution>
+<id>report</id>
+<phase>prepare-package</phase>
+<goals>
+<goal>report</goal>
+</goals>
+</execution>
+<execution>
+<id>post-unit-test</id>
+<phase>test</phase>
+<goals>
+<goal>report</goal>
+</goals>
+</execution>
+</executions>
+<configuration>
+<outputDirectory>target/jacoco_reports</outputDirectory>
+</configuration>
+</plugin>
+
+
+<plugin>
+<groupId>org.jacoco</groupId>
+<artifactId>jacoco-maven-plugin</artifactId>
+<version>0.7.7.201606060606</version>
+<executions>
+<execution>
+<goals>
+<goal>prepare-agent</goal>
+</goals>
+</execution>
+<execution>
+<id>report</id>
+<phase>prepare-package</phase>
+<goals>
+<goal>report</goal>
+</goals>
+</execution>
+</executions>
+</plugin>
+
+
+<plugin>
+<groupId>org.jacoco</groupId>
+<artifactId>jacoco-maven-plugin</artifactId>
+<version>${jacoco.version}</version>
+<executions>
+<execution>
+<id>prepare-agent</id>
+<goals>
+<goal>prepare-agent</goal>
+</goals>
+</execution>
+<execution>
+<id>report</id>
+<phase>prepare-package</phase>
+<goals>
+<goal>report</goal>
+</goals>
+</execution>
+<execution>
+<id>post-unit-test</id>
+<phase>test</phase>
+<goals>
+<goal>report</goal>
+</goals>
+<configuration>
+<!-- Sets the path to the file which contains the execution data. -->
+<dataFile>target/jacoco.exec</dataFile>
+<!-- Sets the output directory for the code coverage report. -->
+<outputDirectory>target/jacoco-ut</outputDirectory>
+</configuration>
+</execution>
+</executions>
+<configuration>
+<systemPropertyVariables>
+<jacoco-agent.destfile>target/jacoco.exec</jacoco-agent.destfile>
+</systemPropertyVariables>
+</configuration>
+</plugin>
